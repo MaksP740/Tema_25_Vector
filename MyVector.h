@@ -8,18 +8,18 @@ class MyVector {
     int size;
 
 public:
-    Vector() { // size = 0 []
+    MyVector() { // size = 0 []
         arr = nullptr;
         size = 0;
     }
-    Vector(int size, Type value) { // size = 3 [3, 5, 6]
+    MyVector(int size, Type value) { // size = 3 [3, 5, 6]
         this->size = size;
         arr = new Type[size];
         for (int i = 0; i < size; i++) {
             arr[i] = value;
         }
     }
-    ~Vector() {
+    ~MyVector() {
         if (arr != nullptr) {
             delete[] arr;
         }
@@ -47,9 +47,26 @@ public:
         tmp[size - 1] = item;
         arr = tmp;
     }
-    Type& operator[](int number);
+    Type& operator[](int number) {
+        return arr[number];
+    }
 
-    Type find_max()const; // пошук елемента з максимальним значенням
-    Type find_min()const; // пошук елемента з мінімальним значенням
-
+    Type find_max()const { // пошук елемента з максимальним значенням
+        Type max = arr[0];
+        for (int i = 1; i < size; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+            return max;
+        }
+    }
+    Type find_min()const {  // пошук елемента з мінімальним значенням
+       Type min = arr[0];
+        for (int i = 1; i < size; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+            return min;
+        }
+    }
 };
