@@ -1,5 +1,6 @@
 
 #include "MyVector.h"
+#include "Medicine.h"
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -26,7 +27,7 @@ int main() {
     a.print();
     b.print();
 */
-
+    /*
     vector<int> v1;
     for (int i = 0; i < 10; i++) {
         v1.push_back(rand()%10 - 10);
@@ -63,9 +64,44 @@ int main() {
     }
     cout << endl;
     //=============================================
+    */
 
+    vector<Medicine> med; //size = 0, Medicine* arr = nullptr
 
+    med.push_back(Medicine ("Nurofen", "pills", 70.43));
+    // size = 1 , arr[0] = {"Nurofen", "pills", 70.43}
 
+    med.push_back(Medicine ("Dr Mom", "syrope", 120.78));
+    // size= 2, arr[1] = {"Dr Mom", "syrope", 120.78}
 
+    med.push_back( Medicine("Aspiryn", "capsules", 45.78));
+    // size= 3, arr[2] = {"Aspiryn", "capsules", 45.78}
+
+    for(int i = 0; i < med.size(); i++){
+        med[i].showInfo();
+    }
+    cout << "=========================================" << endl;
+
+    string name = "Nurofen";
+    auto find = find_if (med.begin(), med.end(),[name](Medicine a) {return a.getTitle() == name;});
+
+    if (find == med.end()) {
+        cout << name << " Not found!" << endl;
+    }
+    else {
+        med.erase(find);
+    }
+
+    for(int i = 0; i < med.size(); i++){
+        med[i].showInfo();
+    }
+
+    cout << "=========================================" << endl;
+
+    for_each(med.begin(), med.end(), [](Medicine &a) {a.setPrice(a.getPrice() * 1.15);});
+
+    for(int i = 0; i < med.size(); i++){
+        med[i].showInfo();
+    }
     return 0;
 }
